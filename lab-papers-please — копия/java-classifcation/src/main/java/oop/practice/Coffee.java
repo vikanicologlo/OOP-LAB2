@@ -21,8 +21,12 @@ class Coffee {
         return name;
     }
 
-    public Intensity getCoffeeIntensity() {
-        return coffeeIntensity;
+    public void printCoffeeDetails() {
+        System.out.println("Coffee intensity: " + coffeeIntensity);
+    }
+
+    public void printDetails() {
+        printCoffeeDetails();
     }
 }
 
@@ -34,8 +38,10 @@ class Americano extends Coffee {
         this.mlOfWater = mlOfWater;
     }
 
-    public int getMlOfWater() {
-        return mlOfWater;
+    @Override
+    public void printDetails() {
+        super.printCoffeeDetails();
+        System.out.println(getName() + " water: " + mlOfWater + " ml");
     }
 }
 
@@ -46,9 +52,10 @@ class Cappuccino extends Coffee {
         super(intensity,"Cappuccino");
         this.mlOfMilk = mlOfMilk;
     }
-
-    public int getMlOfMilk() {
-        return mlOfMilk;
+    @Override
+    public void printDetails() {
+        super.printCoffeeDetails();
+        System.out.println(getName() + " milk: " + mlOfMilk + " ml");
     }
 }
 
@@ -60,10 +67,12 @@ class SyrupCappuccino extends Cappuccino {
         super(intensityCoffee,mltrOfMilk);
         this.syrup = syrup;
     }
-
-    public SyrupType getSyrup() {
-        return syrup;
+    @Override
+    public void printDetails() {
+        super.printDetails();
+        System.out.println("Syrup: " + syrup);
     }
+
     @Override
     public String getName() {
         return "SyrupCappuccino";
@@ -80,7 +89,14 @@ class PumpkinSpiceLatte extends Cappuccino {
 
     }
 
-    public int getMgOfPumpkinSpice() {
-        return mgOfPumpkinSpice;
+    @Override
+    public void printDetails() {
+        super.printDetails();
+        System.out.println("Pumpkin spice: " + mgOfPumpkinSpice + " mg");
+    }
+
+    @Override
+    public String getName() {
+        return "PumpkinSpiceLatte";
     }
 }
