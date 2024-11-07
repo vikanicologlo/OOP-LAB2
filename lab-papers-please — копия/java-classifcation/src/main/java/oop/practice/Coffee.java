@@ -8,23 +8,22 @@ enum SyrupType {
     MACADAMIA, VANILLA, COCONUT, CARAMEL, CHOCOLATE, POPCORN
 }
 
-class Coffee {
+abstract class Coffee {
     private Intensity coffeeIntensity;
     private String name;
 
-    public Coffee(Intensity coffeeIntensity, String name) {
+    protected Coffee(Intensity coffeeIntensity, String name) {
         this.coffeeIntensity = coffeeIntensity;
         this.name = name;
     }
 
-    public String getName() {
+    protected String getName() {
         return name;
     }
 
-    public void printCoffeeDetails() {
+    protected void printCoffeeDetails() {
         System.out.println("Intensity set to " + coffeeIntensity);
     }
-
 
 }
 
@@ -42,11 +41,6 @@ class Americano extends Coffee {
         System.out.println("Adding " + mlOfWater + " ml of water");
         return this;
     }
-
-    public void printDetails() {
-        super.printCoffeeDetails();
-        System.out.println(getName() + " water: " + mlOfWater + " ml");
-    }
 }
 
 class Cappuccino extends Coffee {
@@ -56,6 +50,7 @@ class Cappuccino extends Coffee {
         super(intensity, "Cappuccino");
         this.mlOfMilk = mlOfMilk;
     }
+
     public int getMlOfMilk() {
         return mlOfMilk;
     }
@@ -76,8 +71,8 @@ class Cappuccino extends Coffee {
 class SyrupCappuccino extends Cappuccino {
     private SyrupType syrup;
 
-    public SyrupCappuccino(Intensity intensityCoffee, int mlOfMilk, SyrupType syrup) {
-        super(intensityCoffee, mlOfMilk);
+    public SyrupCappuccino(Intensity intensityCoffee, int mltrOfMilk, SyrupType syrup) {
+        super(intensityCoffee, mltrOfMilk);
         this.syrup = syrup;
     }
 
