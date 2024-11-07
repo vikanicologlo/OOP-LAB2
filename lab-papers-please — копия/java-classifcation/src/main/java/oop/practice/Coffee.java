@@ -10,9 +10,9 @@ enum SyrupType {
 
 class Coffee {
     private Intensity coffeeIntensity;
-    private  String name;
+    private String name;
 
-    public Coffee(Intensity coffeeIntensity,String name) {
+    public Coffee(Intensity coffeeIntensity, String name) {
         this.coffeeIntensity = coffeeIntensity;
         this.name = name;
     }
@@ -22,23 +22,27 @@ class Coffee {
     }
 
     public void printCoffeeDetails() {
-        System.out.println("Coffee intensity: " + coffeeIntensity);
+        System.out.println("Intensity set to " + coffeeIntensity);
     }
 
-    public void printDetails() {
-        printCoffeeDetails();
-    }
+
 }
 
 class Americano extends Coffee {
     private int mlOfWater;
 
     public Americano(Intensity intensityOfCoffee, int mlOfWater) {
-        super(intensityOfCoffee,"Americano");
+        super(intensityOfCoffee, "Americano");
         this.mlOfWater = mlOfWater;
     }
 
-    @Override
+    public final Americano makeAmericano() {
+        System.out.println("Making " + getName());
+        printCoffeeDetails();
+        System.out.println("Adding " + mlOfWater + " ml of water");
+        return this;
+    }
+
     public void printDetails() {
         super.printCoffeeDetails();
         System.out.println(getName() + " water: " + mlOfWater + " ml");
@@ -49,36 +53,53 @@ class Cappuccino extends Coffee {
     private int mlOfMilk;
 
     public Cappuccino(Intensity intensity, int mlOfMilk) {
-        super(intensity,"Cappuccino");
+        super(intensity, "Cappuccino");
         this.mlOfMilk = mlOfMilk;
     }
-    @Override
+    public int getMlOfMilk() {
+        return mlOfMilk;
+    }
+
+    public final Cappuccino makeCappuccino() {
+        System.out.println("Making " + getName());
+        printCoffeeDetails();
+        System.out.println("Adding " + mlOfMilk + " ml of milk");
+        return this;
+    }
+
     public void printDetails() {
         super.printCoffeeDetails();
         System.out.println(getName() + " milk: " + mlOfMilk + " ml");
     }
 }
 
-
 class SyrupCappuccino extends Cappuccino {
     private SyrupType syrup;
 
-    public SyrupCappuccino(Intensity intensityCoffee,int mltrOfMilk, SyrupType syrup) {
-        super(intensityCoffee,mltrOfMilk);
+    public SyrupCappuccino(Intensity intensityCoffee, int mlOfMilk, SyrupType syrup) {
+        super(intensityCoffee, mlOfMilk);
         this.syrup = syrup;
     }
-    @Override
-    public void printDetails() {
-        super.printDetails();
-        System.out.println("Syrup: " + syrup);
+
+    public final SyrupCappuccino makeSyrupCappuccino() {
+        System.out.println("Making " + getName());
+        printCoffeeDetails();
+        System.out.println("Adding " + getMlOfMilk() + " ml of milk");
+        System.out.println("Adding syrup: " + syrup);
+        return this;
     }
 
     @Override
     public String getName() {
         return "SyrupCappuccino";
     }
-}
 
+    @Override
+    public void printDetails() {
+        super.printDetails();
+        System.out.println("Syrup: " + syrup);
+    }
+}
 
 class PumpkinSpiceLatte extends Cappuccino {
     private int mgOfPumpkinSpice;
@@ -86,17 +107,24 @@ class PumpkinSpiceLatte extends Cappuccino {
     public PumpkinSpiceLatte(Intensity intensityOfCoffee, int mlOfMilk, int mgOfPumpkinSpice) {
         super(intensityOfCoffee, mlOfMilk);
         this.mgOfPumpkinSpice = mgOfPumpkinSpice;
+    }
 
+    public final PumpkinSpiceLatte makePumpkinSpiceLatte() {
+        System.out.println("Making " + getName());
+        printCoffeeDetails();
+        System.out.println("Adding " + getMlOfMilk() + " ml of milk");
+        System.out.println("Adding " + mgOfPumpkinSpice + " mg of pumpkin spice");
+        return this;
+    }
+
+    @Override
+    public String getName() {
+        return "PumpkinSpiceLatte";
     }
 
     @Override
     public void printDetails() {
         super.printDetails();
         System.out.println("Pumpkin spice: " + mgOfPumpkinSpice + " mg");
-    }
-
-    @Override
-    public String getName() {
-        return "PumpkinSpiceLatte";
     }
 }
